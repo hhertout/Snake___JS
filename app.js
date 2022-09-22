@@ -1,60 +1,51 @@
+const gameSize = 600;
+const squareSize = 30;
+const canvas = document.getElementById("GAME");
+const ctx = canvas.getContext("2d");
 
-    const gameSize = 600
-    const squareSize = 20
-    const canvas = document.getElementById("GAME")
-    const ctx = canvas.getContext('2d')
-    
-    
-    const snake = new Snake(squareSize)
-    const food = new Food()
-    let currentDirection = 'right'
+const snake = new Snake(squareSize);
+const food = new Food();
+let currentDirection = "right";
 
+const restartButton = document.getElementById("restart");
 
-    function detectKeyPressed (){
-        document.addEventListener('keydown', function(e) {
-            switch (e.key){
-                case 'ArrowUp' :
-                    currentDirection = 'up'
-                    break
-                case 'ArrowDown' : 
-                    currentDirection = 'down'
-                    break
-                case 'ArrowLeft' : 
-                    currentDirection = 'left'
-                    break
-                case 'ArrowRight' : 
-                    currentDirection = 'right'
-                    break 
-            }
-
-        })
+function detectKeyPressed() {
+  document.addEventListener("keydown", function (e) {
+    switch (e.key) {
+      case "ArrowUp":
+        currentDirection = "up";
+        break;
+      case "ArrowDown":
+        currentDirection = "down";
+        break;
+      case "ArrowLeft":
+        currentDirection = "left";
+        break;
+      case "ArrowRight":
+        currentDirection = "right";
+        break;
     }
-    
-    function clearScreen(){
-        ctx.clearRect(0,0, gameSize, gameSize)
-    }
-    
-    function update(){
-        clearScreen()
-        snake.update()
-        food.draw()
-        if(snake.alive == true){
-            setTimeout(update, 100)
-        }
-        
-        
-    }
-    
-    function start(){
-        detectKeyPressed()
-        update()
-    }
-    start()
-    
+  });
+}
 
+function clearScreen() {
+  ctx.clearRect(0, 0, gameSize, gameSize);
+}
 
+function update() {
+  clearScreen();
+  snake.update();
+  food.draw();
+  if (snake.alive == true) {
+    setTimeout(update, 100);
+  }
+}
 
-
+function start() {
+  detectKeyPressed();
+  update();
+}
+start();
 
 /**
  * 
